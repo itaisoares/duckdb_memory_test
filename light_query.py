@@ -1,16 +1,12 @@
-import duckdb
-import pandas as pd
+from base import run_query, users_parquet_path, orders_parquet_path
 
-# Connect to an in-memory DuckDB instance
-con = duckdb.connect()
 
-# Query to join users and orders, calculate age, bucket the ages, and sum the orders
-query = """
+query = f"""
 WITH user_ages AS (
     SELECT
         id,
         DATE_PART('year', AGE(birthdate)) AS age
-    FROM './data/users.parquet'
+    FROM '{users_parquet_path}'
 ),
 age_buckets AS (
     SELECT
@@ -33,14 +29,11 @@ SELECT
     age_bucket,
     SUM(o.price * o.quantity) AS total_orders
 FROM age_buckets u
-JOIN './data/orders.parquet' o
+JOIN '{orders_parquet_path}' o
 ON u.id = o.user_id
 GROUP BY age_bucket
 ORDER BY age_bucket
 """
 
-# Execute the query and fetch the result
-result = con.execute(query).fetchdf()
-
-# Print the result
-print(result)
+print("Without window function")
+run_query(query)

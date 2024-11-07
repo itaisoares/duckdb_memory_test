@@ -2,3 +2,5 @@
 duck_repo
 data
 .tmp
+__pycache__
+*.dat

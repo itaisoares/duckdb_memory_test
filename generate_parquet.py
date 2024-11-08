@@ -6,10 +6,10 @@ import uuid
 import os
 
 # Constants
-NUM_USERS = 10_000_000
+NUM_USERS = 1_000_000
 NUM_PRODUCTS = 5_000
-NUM_ORDERS = 10_000_000
-CHUNK_SIZE = 250_000  # Adjust the chunk size based on your memory capacity
+NUM_ORDERS = 1_000_000
+CHUNK_SIZE = 1_000_000  # Adjust the chunk size based on your memory capacity
 DATA_FOLDER = 'data'
 
 # Ensure the data folder exists

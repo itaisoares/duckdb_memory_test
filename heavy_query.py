@@ -1,9 +1,14 @@
 import os
-from base import run_query, users_parquet_path, orders_parquet_path
+import sys
+from base import run_query
 
 os.environ["MALLOC_CONF"] = (
     f"narenas:{os.cpu_count()},lg_chunk:21,background_thread:true,dirty_decay_ms:10000,muzzy_decay_ms:10000"
 )
+
+folder_size = sys.argv[1] if len(sys.argv) > 1 else ''
+users_parquet_path = f'./data/{folder_size}/users.parquet'
+orders_parquet_path = f'./data/{folder_size}/orders.parquet'
 
 query = f"""
 WITH joined_data AS (
@@ -30,4 +35,4 @@ FROM joined_data
 """
 
 print("With window function:")
-run_query(query)
+run_query(query, folder_size)

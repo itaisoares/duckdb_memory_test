@@ -1,5 +1,10 @@
-from base import run_query, users_parquet_path, orders_parquet_path
+import sys
+from base import run_query
 
+
+folder_size = sys.argv[1] if len(sys.argv) > 1 else ''
+users_parquet_path = f'./data/{folder_size}/users.parquet'
+orders_parquet_path = f'./data/{folder_size}/orders.parquet'
 
 query = f"""
 WITH user_ages AS (

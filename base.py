@@ -1,6 +1,6 @@
-import duckdb
 import os
 import time
+import duckdb
 
 def get_file_size_in_gb(file_path):
     file_size = os.path.getsize(file_path)
@@ -9,6 +9,12 @@ def get_file_size_in_gb(file_path):
 
 
 con = duckdb.connect()
+
+# con.execute("SET memory_limit='15GB'")
+# con.execute("SET threads=8")
+# con.execute("SET partitioned_write_flush_threshold=1024")
+
+
 
 def run_query(query:str, folder_size:str):
     print(f"DuckDB version: {duckdb.__version__}")

@@ -41,4 +41,4 @@ ORDER BY age_bucket
 """
 
 print("Without window function")
-run_query(query)
+run_query(query, folder_size)
